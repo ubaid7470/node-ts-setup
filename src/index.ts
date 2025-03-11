@@ -17,6 +17,8 @@ dotenv.config();
 
 const app: Express = express();
 
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(cors());
 
@@ -35,7 +37,8 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'trusted-cdn.com'], // Allow scripts only from self & trusted CDN
+      scriptSrc: ["'self'", 'trusted-cdn.com'],
+      connectSrc: ["'self'", 'http://localhost:3000'],
     },
   }),
 );
@@ -49,10 +52,10 @@ const server = http.createServer(app);
 
 // Routes
 app.get('/', (_req: Request, res: Response) => {
-  res.send('Server is Running!');
+  res.send('Server is Running! ');
 });
 
-app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/user/', userRoutes);
 
 app.use(errorHandler);
 

@@ -18,10 +18,10 @@
     "noFallthroughCasesInSwitch": true, 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src"],                     
+  "include": ["src", "src/tests"],                     
   "exclude": ["node_modules", "dist"]     
 
 }
